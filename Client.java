@@ -15,6 +15,7 @@ public class Client {
     System.out.println("Connected to server");
 
     // Get the input and output streams
+    //hassan
     InputStream is = socket.getInputStream();
     OutputStream os = socket.getOutputStream();
 
