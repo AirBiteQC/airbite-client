@@ -9,10 +9,10 @@ To use the AirBite client, simply compile and run the Client.java file:
 
 ```bash
 javac Client.java
-java Client
+java Client localhost:3721
 ```
 
-The client will connect to the server running on the default port `3721`. You can modify the server IP address and port number in the `Client.java` file to connect to a different server.
+The client will connect to the server `localhost` running on the default port `3721`. You can modify the server IP address and port number in the command line argument to connect to a different server.
 
 Once connected, the client will prompt you to enter your name and select a restaurant. After selecting a restaurant, you can browse the menu, select items to order, and choose whether you want the food delivered to your gate or if you will pick it up.
 
