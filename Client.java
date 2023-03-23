@@ -38,8 +38,9 @@ public class Client {
     is.read(response);
     System.out.println("Server response: " + new String(response));
 
+     new MyFrame();
     // Close the socket
-    socket.close();
+    //socket.close();
   }
 
 }
