@@ -13,14 +13,14 @@ class MyFrame
     // Components of the Form
     private Container c;
     private JLabel title;
-    private JLabel name;
-    private JTextField tname;
     private JLabel email;
     private JTextField temail;
+    private JLabel pass;
+    private JTextField tpass;
     private JComboBox Srest;
     private JCheckBox term;
-    private JButton sub;
-    private JButton reset;
+    private JButton login;
+    private JButton sign;
     private JTextArea tout;
     private JLabel res;
     private JTextArea resadd;
@@ -39,41 +39,49 @@ class MyFrame
  
         title = new JLabel("Login Form");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
-        title.setSize(200, 30);
+        title.setSize(200, 35);
         title.setLocation(150, 30);
         c.add(title);
  
-        name = new JLabel("Email");
-        name.setFont(new Font("Arial", Font.PLAIN, 20));
-        name.setSize(100, 20);
-        name.setLocation(100, 100);
-        c.add(name);
- 
-        tname = new JTextField();
-        tname.setFont(new Font("Arial", Font.PLAIN, 15));
-        tname.setSize(190, 20);
-        tname.setLocation(200, 100);
-        c.add(tname);
- 
-        email = new JLabel("Password");
+        email = new JLabel("Email");
         email.setFont(new Font("Arial", Font.PLAIN, 20));
         email.setSize(100, 20);
-        email.setLocation(100, 150);
+        email.setLocation(100, 100);
         c.add(email);
  
         temail = new JTextField();
         temail.setFont(new Font("Arial", Font.PLAIN, 15));
-        temail.setSize(150, 20);
-        temail.setLocation(200, 150);
+        temail.setSize(190, 20);
+        temail.setLocation(200, 100);
         c.add(temail);
  
-        sub = new JButton("Submit");
-        sub.setFont(new Font("Arial", Font.PLAIN, 15));
-        sub.setSize(100, 20);
-        sub.setLocation(150, 250);
-        sub.addActionListener(this);
-        c.add(sub);
+        pass = new JLabel("Password");
+        pass.setFont(new Font("Arial", Font.PLAIN, 20));
+        pass.setSize(100, 20);
+        pass.setLocation(100, 150);
+        c.add(pass);
  
+        tpass = new JTextField();
+        tpass.setFont(new Font("Arial", Font.PLAIN, 15));
+        tpass.setSize(190, 20);
+        tpass.setLocation(200, 150);
+        c.add(tpass);
+ 
+        // Buttons
+        login = new JButton("Login");
+        login.setFont(new Font("Arial", Font.PLAIN, 15));
+        login.setSize(100, 20);
+        login.setLocation(150, 250);
+        login.addActionListener(this);
+        c.add(login);
+ 
+        sign = new JButton("Sign up");
+        sign.setFont(new Font("Arial", Font.PLAIN, 15));
+        sign.setSize(100, 20);
+        sign.setLocation(150, 280);
+        sign.addActionListener(this);
+        c.add(sign);
+
         setVisible(true);
     }
  
@@ -82,12 +90,11 @@ class MyFrame
     // by the user and act accordingly
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getSource() == sub) {
+        if (e.getSource() == sign) {
             if (term.isSelected()) {
-                String data = "Name : "+ tname.getText() + "\n ";
-                String data2 = "Resturant Selected : "+ (String)Srest.getSelectedItem()+ "\n";
-                String data3 = "Email : "+(String)temail.getText()+"\n";
-                System.out.println(data  + data2 +data3 );
+                String data = "Email : "+ temail.getText() + "\n ";
+                String data3 = "Passsword : "+(String)tpass.getText()+"\n";
+                System.out.println(data  +data3 );
                 
             }
             else {
@@ -98,10 +105,10 @@ class MyFrame
             }
         }
  
-        else if (e.getSource() == reset) {
+        else if (e.getSource() == sign) {
             String def = "";
-            tname.setText(def);
             temail.setText(def);
+            tpass.setText(def);
 
   
             term.setSelected(false);

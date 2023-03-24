@@ -17,35 +17,29 @@ class MyFrame
     private JTextField tname;
     private JLabel email;
     private JTextField temail;
-    private JLabel rest;
-    private JComboBox Srest;
     private JCheckBox term;
     private JButton sub;
     private JButton reset;
     private JTextArea tout;
     private JLabel res;
     private JTextArea resadd;
- 
-    private String Resturants[]
-        = { "Resturant 1", "resturant 2" , "resturant 3" };
 
- 
     // constructor, to initialize the components
     // with default values.
     public MyFrame()
     {
-        setTitle("Registration Form");
-        setBounds(300, 90, 900, 600);
+        setTitle("Sign up Form");
+        setBounds(300, 90, 600, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
  
         c = getContentPane();
         c.setLayout(null);
  
-        title = new JLabel("Registration Form");
+        title = new JLabel("Sign Up Form");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
         title.setSize(300, 30);
-        title.setLocation(300, 30);
+        title.setLocation(100, 30);
         c.add(title);
  
         name = new JLabel("Name");
@@ -68,39 +62,29 @@ class MyFrame
  
         temail = new JTextField();
         temail.setFont(new Font("Arial", Font.PLAIN, 15));
-        temail.setSize(150, 20);
+        temail.setSize(190, 20);
         temail.setLocation(200, 150);
         c.add(temail);
  
-        rest = new JLabel("Resturants");
-        rest.setFont(new Font("Arial", Font.PLAIN, 20));
-        rest.setSize(100, 20);
-        rest.setLocation(100, 250);
-        c.add(rest);
- 
-        Srest = new JComboBox(Resturants);
-        Srest.setFont(new Font("Arial", Font.PLAIN, 15));
-        Srest.setSize(50, 20);
-        Srest.setLocation(200, 250);
-        c.add(Srest);
+
 
         term = new JCheckBox("Accept Terms And Conditions.");
         term.setFont(new Font("Arial", Font.PLAIN, 15));
         term.setSize(250, 20);
-        term.setLocation(150, 400);
+        term.setLocation(150, 200);
         c.add(term);
  
         sub = new JButton("Submit");
         sub.setFont(new Font("Arial", Font.PLAIN, 15));
         sub.setSize(100, 20);
-        sub.setLocation(150, 450);
+        sub.setLocation(150, 250);
         sub.addActionListener(this);
         c.add(sub);
  
         reset = new JButton("Reset");
         reset.setFont(new Font("Arial", Font.PLAIN, 15));
         reset.setSize(100, 20);
-        reset.setLocation(270, 450);
+        reset.setLocation(150, 280);
         reset.addActionListener(this);
         c.add(reset);
  
@@ -116,9 +100,8 @@ class MyFrame
         if (e.getSource() == sub) {
             if (term.isSelected()) {
                 String data = "Name : "+ tname.getText() + "\n ";
-                String data2 = "Resturant Selected : "+ (String)Srest.getSelectedItem()+ "\n";
                 String data3 = "Email : "+(String)temail.getText()+"\n";
-                System.out.println(data  + data2 +data3 );
+                System.out.println(data   + data3 );
                 
             }
             else {
@@ -136,7 +119,6 @@ class MyFrame
 
   
             term.setSelected(false);
-            Srest.setSelectedIndex(0);
             resadd.setText(def);
         }
     }
