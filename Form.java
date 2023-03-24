@@ -125,7 +125,7 @@ class MyFrame
 }
  
 // Driver Code
-class Form {
+class Signup {
     public static void main(String[] args) throws Exception
     {
        new MyFrame();
