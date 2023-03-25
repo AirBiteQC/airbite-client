@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
  
-class MyFrame
+class LoginFrame
     extends JFrame
     implements ActionListener {
  
@@ -27,7 +27,7 @@ class MyFrame
 
     // constructor, to initialize the components
     // with default values.
-    public MyFrame()
+    public LoginFrame()
     {
         setTitle("Login Form");
         setBounds(300, 90, 500, 400);
@@ -117,11 +117,12 @@ class MyFrame
         }
     }
 }
- 
+  
 // Driver Code
 class LoginForm {
     public static void main(String[] args) throws Exception
     {
-       new MyFrame();
+       new LoginFrame();
     }
+    
 }
