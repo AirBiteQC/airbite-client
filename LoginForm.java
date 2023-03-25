@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
  
 public class LoginForm
-    extends JFrame
+    extends JDialog
     implements ActionListener {
  
     // Components of the Form
@@ -32,7 +32,7 @@ public class LoginForm
     {
         setTitle("Login Form");
         setBounds(300, 90, 500, 400);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+      //  setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
  
         c = getContentPane();

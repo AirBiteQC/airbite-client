@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
  
 public class Signup
-    extends JFrame
+    extends JDialog
     implements ActionListener {
  
     // Components of the Form
