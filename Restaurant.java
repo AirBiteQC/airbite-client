@@ -1,13 +1,13 @@
 
 /**
- * Client
+ * Restaurant
  */
 
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class Client {
+public class Restaurant {
 
   // Connect to the TCP server at <address>:<port>
 
@@ -38,14 +38,12 @@ public class Client {
     is.read(response);
     System.out.println("Server response: " + new String(response));
 
-    LoginForm f = new LoginForm();
-    // f.getEntries() retrives the Entries from the Forms
-    //System.out.println("Client page "+f.getEntries());
-    os.write(f.getEntries().getBytes());
+// Natasha
+// Read Jason file and send it to server
 
     
     // Close the socket
-    socket.close();
+    //socket.close();
   }
 
 }
