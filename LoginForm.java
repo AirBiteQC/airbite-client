@@ -17,19 +17,17 @@ public class LoginForm
     private JTextField temail;
     private JLabel pass;
     private JPasswordField tpass;
-    private JComboBox Srest;
-    private JCheckBox term;
     private JButton login;
     private JButton sign;
-    private JTextArea tout;
-    private JLabel res;
-    private JTextArea resadd;
+
     String Entries;
 
     // constructor, to initialize the components
     // with default values.
     public LoginForm()
     {
+        this.setModal(true);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Login Form");
         setBounds(300, 90, 500, 400);
       //  setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -95,16 +93,17 @@ public class LoginForm
             
             Entries = temail.getText(); 
             String p = new String(tpass.getPassword());
-            Entries = "Login form : "+ Entries +" "+p; 
-            System.out.println( Entries);             
+            Entries =  Entries +" "+p; 
+            this.dispose();     // closing the login Frame     
             // Open Resturant List
         }
  
         else if (e.getSource() == sign) {
             // Open Signup form
             Signup S = new Signup();
-            Entries = "Sign up " + S.getEntries();
-            System.out.println(Entries);
+            Entries =  S.getEntries();
+            this.dispose();     // close the frame
+           // System.out.println("Sign up " + Entries);
         }
     }
     public String getEntries(){

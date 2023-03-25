@@ -39,7 +39,9 @@ public class Client {
     System.out.println("Server response: " + new String(response));
 
     LoginForm f = new LoginForm();
-
+    // f.getEntries() retrives the Entries from the Forms
+    //System.out.println("Client page "+f.getEntries());
+    os.write(f.getEntries().getBytes());
     // Close the socket
     socket.close();
   }

@@ -20,18 +20,18 @@ public class Signup
     private JCheckBox term;
     private JButton sub;
     private JButton reset;
-    private JTextArea tout;
     private JLabel res;
-    private JTextArea resadd;
     String Entries;
 
     // constructor, to initialize the components
     // with default values.
     public Signup()
     {
+        this.setModal(true);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Sign up Form");
         setBounds(300, 90, 600, 400);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+       // this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setResizable(false);
  
         c = getContentPane();
@@ -102,14 +102,10 @@ public class Signup
             if (term.isSelected()) {
                 Entries = tname.getText();
                 Entries =  Entries+" "+(String)temail.getText();
-                System.out.println(Entries);
+             //   System.out.println(Entries);
                 
-            }
-            else {
-                tout.setText("");
-                resadd.setText("");
-                res.setText("Please accept the"
-                            + " terms & conditions..");
+                this.setModal(false);
+                this.dispose();
             }
         }
  
@@ -120,7 +116,6 @@ public class Signup
 
             Entries = null;
             term.setSelected(false);
-            resadd.setText(def);
         }
     }
     public String getEntries(){
