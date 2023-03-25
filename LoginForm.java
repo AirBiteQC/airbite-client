@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
  
-class LoginFrame
+public class LoginForm
     extends JFrame
     implements ActionListener {
  
@@ -16,7 +16,7 @@ class LoginFrame
     private JLabel email;
     private JTextField temail;
     private JLabel pass;
-    private JTextField tpass;
+    private JPasswordField tpass;
     private JComboBox Srest;
     private JCheckBox term;
     private JButton login;
@@ -24,10 +24,11 @@ class LoginFrame
     private JTextArea tout;
     private JLabel res;
     private JTextArea resadd;
+    String Entries;
 
     // constructor, to initialize the components
     // with default values.
-    public LoginFrame()
+    public LoginForm()
     {
         setTitle("Login Form");
         setBounds(300, 90, 500, 400);
@@ -61,7 +62,7 @@ class LoginFrame
         pass.setLocation(100, 150);
         c.add(pass);
  
-        tpass = new JTextField();
+        tpass = new JPasswordField(20);
         tpass.setFont(new Font("Arial", Font.PLAIN, 15));
         tpass.setSize(190, 20);
         tpass.setLocation(200, 150);
@@ -90,39 +91,24 @@ class LoginFrame
     // by the user and act accordingly
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getSource() == sign) {
-            if (term.isSelected()) {
-                String data = "Email : "+ temail.getText() + "\n ";
-                String data3 = "Passsword : "+(String)tpass.getText()+"\n";
-                System.out.println(data  +data3 );
-                
-            }
-            else {
-                tout.setText("");
-                resadd.setText("");
-                res.setText("Please accept the"
-                            + " terms & conditions..");
-            }
+        if (e.getSource() == login) {
+            
+            Entries = temail.getText(); 
+            String p = new String(tpass.getPassword());
+            Entries = "Login form : "+ Entries +" "+p; 
+            System.out.println( Entries);             
+            // Open Resturant List
         }
  
         else if (e.getSource() == sign) {
-            String def = "";
-            temail.setText(def);
-            tpass.setText(def);
-
-  
-            term.setSelected(false);
-            Srest.setSelectedIndex(0);
-            resadd.setText(def);
+            // Open Signup form
+            Signup S = new Signup();
+            Entries = "Sign up " + S.getEntries();
+            System.out.println(Entries);
         }
     }
+    public String getEntries(){
+        return Entries;
+    }
 }
   
-// Driver Code
-class LoginForm {
-    public static void main(String[] args) throws Exception
-    {
-       new LoginFrame();
-    }
-    
-}

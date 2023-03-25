@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
  
-class SignUpFrame
+public class Signup
     extends JFrame
     implements ActionListener {
  
@@ -23,10 +23,11 @@ class SignUpFrame
     private JTextArea tout;
     private JLabel res;
     private JTextArea resadd;
+    String Entries;
 
     // constructor, to initialize the components
     // with default values.
-    public SignUpFrame()
+    public Signup()
     {
         setTitle("Sign up Form");
         setBounds(300, 90, 600, 400);
@@ -99,9 +100,9 @@ class SignUpFrame
     {
         if (e.getSource() == sub) {
             if (term.isSelected()) {
-                String data = "Name : "+ tname.getText() + "\n ";
-                String data3 = "Email : "+(String)temail.getText()+"\n";
-                System.out.println(data   + data3 );
+                Entries = tname.getText();
+                Entries =  Entries+" "+(String)temail.getText();
+                System.out.println(Entries);
                 
             }
             else {
@@ -117,17 +118,13 @@ class SignUpFrame
             tname.setText(def);
             temail.setText(def);
 
-  
+            Entries = null;
             term.setSelected(false);
             resadd.setText(def);
         }
     }
-}
- 
-// Driver Code
-class Signup {
-    public static void main(String[] args) throws Exception
-    {
-       new SignUpFrame();
+    public String getEntries(){
+        return Entries;
     }
 }
+ 
