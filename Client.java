@@ -16,8 +16,8 @@ public class Client {
       System.out.println("Usage: java Client <address> <port>");
       return;
     }
-    String address = "192.168.1.156";//args[0];
-    int port = 3721;//Integer.parseInt(args[1]);
+    String address = args[0];
+    int port = Integer.parseInt(args[1]);
 
     // Connect to the server
     Socket socket = new Socket(address, port);
