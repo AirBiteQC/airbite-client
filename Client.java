@@ -40,8 +40,9 @@ public class Client {
 
     LoginForm f = new LoginForm();
     // f.getEntries() retrives the Entries from the Forms
-    //System.out.println("Client page "+f.getEntries());
-    os.write(f.getEntries().getBytes());
+    System.out.println("Client page "+f.getEntries());
+    //System.out.println(f.getEntries());
+    os.write( f.getEntries().getBytes());
 
     
     // Close the socket
