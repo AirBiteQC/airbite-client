@@ -21,7 +21,7 @@ public class Signup
     private JButton sub;
     private JButton reset;
     private JLabel res;
-    String Entries;
+    String entries;
 
     // constructor, to initialize the components
     // with default values.
@@ -100,8 +100,8 @@ public class Signup
     {
         if (e.getSource() == sub) {
             if (term.isSelected()) {
-                Entries = tname.getText();
-                Entries =  Entries+" "+(String)temail.getText();
+                entries = tname.getText();
+                entries =  entries+" "+(String)temail.getText();
              //   System.out.println(Entries);
                 
                 this.setModal(false);
@@ -114,12 +114,12 @@ public class Signup
             tname.setText(def);
             temail.setText(def);
 
-            Entries = null;
+            entries = null;
             term.setSelected(false);
         }
     }
     public String getEntries(){
-        return Entries;
+        return entries;
     }
 }
  

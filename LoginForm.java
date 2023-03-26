@@ -20,7 +20,7 @@ public class LoginForm
     private JButton login;
     private JButton sign;
 
-    String Entries;
+    String entries;
 
     // constructor, to initialize the components
     // with default values.
@@ -91,9 +91,10 @@ public class LoginForm
     {
         if (e.getSource() == login) {
             
-            Entries = temail.getText(); 
+            entries = "login|";
+            entries = temail.getText(); 
             String p = new String(tpass.getPassword());
-            Entries =  Entries +" "+p; 
+            entries =  entries +"|"+p; 
             this.dispose();     // closing the login Frame     
             // Open Resturant List
         }
@@ -101,13 +102,13 @@ public class LoginForm
         else if (e.getSource() == sign) {
             // Open Signup form
             Signup S = new Signup();
-            Entries =  S.getEntries();
+            entries =  S.getEntries();
             this.dispose();     // close the frame
            // System.out.println("Sign up " + Entries);
         }
     }
     public String getEntries(){
-        return Entries;
+        return entries;
     }
 }
   
