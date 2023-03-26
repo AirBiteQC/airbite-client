@@ -15,12 +15,13 @@ public class Signup
     private JLabel title;
     private JLabel name;
     private JTextField tname;
+    private JLabel pass;
+    private JPasswordField tpass;
     private JLabel email;
     private JTextField temail;
     private JCheckBox term;
     private JButton sub;
     private JButton reset;
-    private JLabel res;
     String Entries;
 
     // constructor, to initialize the components
@@ -55,16 +56,28 @@ public class Signup
         tname.setLocation(200, 100);
         c.add(tname);
  
+        pass = new JLabel("Password");
+        pass.setFont(new Font("Arial", Font.PLAIN, 20));
+        pass.setSize(100, 20);
+        pass.setLocation(100, 128);
+        c.add(pass);
+ 
+        tpass = new JPasswordField();
+        tpass.setFont(new Font("Arial", Font.PLAIN, 15));
+        tpass.setSize(190, 20);
+        tpass.setLocation(200, 128);
+        c.add(tpass);
+
         email = new JLabel("Email");
         email.setFont(new Font("Arial", Font.PLAIN, 20));
         email.setSize(100, 20);
-        email.setLocation(100, 150);
+        email.setLocation(100, 155);
         c.add(email);
  
         temail = new JTextField();
         temail.setFont(new Font("Arial", Font.PLAIN, 15));
         temail.setSize(190, 20);
-        temail.setLocation(200, 150);
+        temail.setLocation(200, 155);
         c.add(temail);
  
 
@@ -101,8 +114,10 @@ public class Signup
         if (e.getSource() == sub) {
             if (term.isSelected()) {
                 Entries = tname.getText();
+                String p = new String(tpass.getPassword());
+                Entries = Entries+" "+p;
                 Entries =  Entries+" "+(String)temail.getText();
-             //   System.out.println(Entries);
+                System.out.println(Entries);
                 
                 this.setModal(false);
                 this.dispose();
@@ -117,6 +132,10 @@ public class Signup
             Entries = null;
             term.setSelected(false);
         }
+    }
+
+    public static void main(String[] args){
+        new Signup();
     }
     public String getEntries(){
         return Entries;
