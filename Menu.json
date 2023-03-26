@@ -1,0 +1,52 @@
+[  
+                {"price": 12.00,
+                "name": "Orange Chicken",
+                "img": "PE-orange-chicken.jpg",
+            "restaurant": "Panda Express"
+                },
+
+                {"price" : 13.00,  
+                "name"  : "Scallion Beef",
+                "img" :  "PE-scallion-beef.jpg",
+            "restaurant": "Panda Express"
+                },
+
+                {"price" : 10.00,  
+                "name"  : "Garlic Veggie Mix",
+                "img" : "PE-garlic-veggiemix.jpg",
+            "restaurant": "Panda Express"
+                },
+    
+        
+                {"price": 8.00,
+                "name": "Cactus Blossom",
+                "img": "TR-cactus-blossom.jpg",
+            "restaurant": "Texas Road House"},
+
+                {"price" : 20.00,  
+                "name"  : "Chicken Fried Steak",
+                "img" :  "TR-chicken-fried-steak.jpg",
+            "restaurant": "Texas Road House"},
+
+                {"price" : 30.00,  
+                "name"  : "Bone-In Ribeye",
+                "img" : "TR-bone-in-ribeye.jpg",
+            "restaurant": "Texas Road House"},
+
+
+
+                {"price": 6.00,
+                "name": "Vegetar Pakora",
+                "img": "SK-vegetar-pakora.jpg",
+            "restaurant": "Shalimar Kacchi"},
+
+                {"price" : 30.00,  
+                "name"  : "Lam Karahi",
+                "img" :  "SK-lam-karahi.jpg",
+            "restaurant": "Shalimar Kacchi"},
+
+                {"price" : 26.00,  
+                "name"  : "Chicken Jalfrezi",
+                "img" : "SK-chicken-jalfrezi.jpg",
+            "restaurant": "Shalimar Kacchi"}
+            ]
