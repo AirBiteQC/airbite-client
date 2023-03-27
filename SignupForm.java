@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
  
-public class Signup
+public class SignupForm
     extends JDialog
     implements ActionListener {
  
@@ -27,7 +27,7 @@ public class Signup
 
     // constructor, to initialize the components
     // with default values.
-    public Signup()
+    public SignupForm()
     {
         this.setModal(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -135,7 +135,7 @@ public class Signup
     }
 
     public static void main(String[] args){
-        new Signup();
+        new SignupForm();
     }
     public String getEntries(){
         return entries;
