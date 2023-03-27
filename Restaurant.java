@@ -3,9 +3,18 @@
  * Restaurant
  */
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import java.io.StringReader;
 
 public class Restaurant {
 
@@ -24,7 +33,7 @@ public class Restaurant {
     System.out.println("Connected to server " + socket.getInetAddress() + ":" + socket.getPort());
 
     // Get the input and output streams
-    //hassan
+    // hassan
     InputStream is = socket.getInputStream();
     OutputStream os = socket.getOutputStream();
 
@@ -38,12 +47,32 @@ public class Restaurant {
     is.read(response);
     System.out.println("Server response: " + new String(response));
 
-// Natasha
-// Read Jason file and send it to server
-
-    
-    // Close the socket
-    //socket.close();
+    // Read Jason file and send it to server upon request
+    // read the contents of the JSON file into a String object using a FileReader or
+    // InputStream
+    String jsonFilePath = "Menu3.json"; // Replace with your file path
+    JsonObject jsonObject = readJsonFile(jsonFilePath);
+    sendJsonToServer(jsonObject);
   }
 
+  public static JsonObject readJsonFile(String filePath) throws IOException {
+    FileReader fileReader = new FileReader(filePath);
+    JsonReader jsonReader = Json.createReader(fileReader);
+    JsonObject jsonObject = jsonReader.readObject();
+    jsonReader.close();
+    return jsonObject;
+  }
+
+  public static void sendJsonToServer(JsonObject jsonObject) throws IOException {
+    String hostName = "localhost"; // Replace with your host name or IP address
+    int portNumber = 12345; // Replace with your port number
+
+    try (Socket socket = new Socket(hostName, portNumber);
+        OutputStream outputStream = socket.getOutputStream()) {
+      outputStream.write(jsonObject.toString().getBytes());
+    }
+  }
 }
+
+// Close the socket
+// socket.close();
