@@ -1,0 +1,15 @@
+{
+"Shalimar Kacchi":[
+                {"price": 6.00,
+                "name": "Vegetar Pakora",
+                "img": "SK-vegetar-pakora.jpg"},
+
+                {"price" : 30.00,  
+                "name"  : "Lam Karahi",
+                "img" :  "SK-lam-karahi.jpg"},
+
+                {"price" : 26.00,  
+                "name"  : "Chicken Jalfrezi",
+                "img" : "SK-chicken-jalfrezi.jpg"}
+                    ]  
+}
