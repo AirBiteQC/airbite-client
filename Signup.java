@@ -22,7 +22,8 @@ public class Signup
     private JCheckBox term;
     private JButton sub;
     private JButton reset;
-    String Entries;
+    private JLabel res;
+    String entries;
 
     // constructor, to initialize the components
     // with default values.
@@ -113,12 +114,11 @@ public class Signup
     {
         if (e.getSource() == sub) {
             if (term.isSelected()) {
-                Entries = tname.getText();
+                entries = tname.getText();
+                entries =  entries+" "+(String)temail.getText();
+             //   System.out.println(entries);
                 String p = new String(tpass.getPassword());
-                Entries = Entries+" "+p;
-                Entries =  Entries+" "+(String)temail.getText();
-                System.out.println(Entries);
-                
+
                 this.setModal(false);
                 this.dispose();
             }
@@ -129,7 +129,7 @@ public class Signup
             tname.setText(def);
             temail.setText(def);
 
-            Entries = null;
+            entries = null;
             term.setSelected(false);
         }
     }
@@ -138,7 +138,7 @@ public class Signup
         new Signup();
     }
     public String getEntries(){
-        return Entries;
+        return entries;
     }
 }
  
