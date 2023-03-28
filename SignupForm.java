@@ -131,19 +131,21 @@ public class SignupForm
                 // display a dialog box if the response is "Login failed"
                 if(res.contains("failed")) {
                     System.out.println("signupForm: Registeration Failed");
+                    this.setModal(false);
+                    this.dispose();
                     JOptionPane.showMessageDialog(this, "Email already Exist", "Sign-up failed", JOptionPane.ERROR_MESSAGE, new ImageIcon("./img/AirBite-64px-round.png"));
                 }
                 else{
                     System.out.println("Signup Form: Signup successful");
-                   // JOptionPane.showMessageDialog(this, "Login Successful Welcome "+ tname.getText() );
+                    this.setModal(false);
+                    this.dispose();
+                    JOptionPane.showMessageDialog(this, "Login Successful Welcome "+ tname.getText() );
                 }
             }
             catch(Exception ioe){
                 ioe.printStackTrace();
             }
                 
-                this.setModal(false);
-                this.dispose();
             }
         }
  
