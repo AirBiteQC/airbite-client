@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.io.*;
 import java.net.*;
 
-public class LandingForm extends JFrame implements ActionListener {
+public class LandingForm extends JDialog implements ActionListener {
 
     // Components of the Form
     private Container c;
@@ -21,7 +21,8 @@ public class LandingForm extends JFrame implements ActionListener {
     {
         setTitle("Landing Form");
         setBounds(300, 90, 1000, 400);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setModal(true);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         c = getContentPane();
@@ -99,7 +100,7 @@ public class LandingForm extends JFrame implements ActionListener {
             Client.signupForm = new SignupForm();
             // f.getEntries() retrieves the Entries from the Forms
             System.out.println("Client: open signup form");
-            Client.signupForm.setVisible(true);
+            //Client.signupForm.setVisible(true);
             //System.out.println(f.getEntries());
             //os.write( f.getEntries().getBytes());
         }

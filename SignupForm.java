@@ -114,11 +114,34 @@ public class SignupForm
     {
         if (e.getSource() == sub) {
             if (term.isSelected()) {
-                entries = tname.getText();
-                entries =  entries+" "+(String)temail.getText();
-             //   System.out.println(entries);
+                entries = "register|";
+                entries += tname.getText();
+                entries += "|"+(String)temail.getText();
                 String p = new String(tpass.getPassword());
-
+                entries += "|"+p;
+               
+            System.out.println("SingupForm: Sending to Server : "+ entries);
+            try{
+                Client.os.write(entries.getBytes());
+                // get server response
+                byte[] response = new byte[1024];
+                Client.is.read(response);
+                String res = new String(response);
+                System.out.println("LoginForm: server response " + new String(res));
+                // display a dialog box if the response is "Login failed"
+                if(res.contains("failed")) {
+                    System.out.println("signupForm: Registeration Failed");
+                    JOptionPane.showMessageDialog(this, "Email already Exist", "Sign-up failed", JOptionPane.ERROR_MESSAGE, new ImageIcon("./img/AirBite-64px-round.png"));
+                }
+                else{
+                    System.out.println("Signup Form: Signup successful");
+                   // JOptionPane.showMessageDialog(this, "Login Successful Welcome "+ tname.getText() );
+                }
+            }
+            catch(Exception ioe){
+                ioe.printStackTrace();
+            }
+                
                 this.setModal(false);
                 this.dispose();
             }
@@ -128,14 +151,14 @@ public class SignupForm
             String def = "";
             tname.setText(def);
             temail.setText(def);
-
+            tpass.setText(def);
             entries = null;
             term.setSelected(false);
         }
     }
 
     public static void main(String[] args){
-        new SignupForm();
+       // new SignupForm();
     }
     public String getEntries(){
         return entries;
