@@ -8,7 +8,7 @@ This client application has been developed and tested on Java 8. It does not req
 To use the AirBite client, simply compile and run the Client.java file:
 
 ```bash
-javac Client.java
+javac *.java
 java Client localhost:3721
 ```
 
