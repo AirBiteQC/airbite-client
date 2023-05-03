@@ -2,11 +2,15 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.awt.Image;
+import java.awt.Toolkit;
+
 
 public class MenuParser {
 
     public static void main(String[] args) {
-        String filename = "Menu.txt";
+        String filename = "Panda_Express_Menu.txt";
         ArrayList<MenuItem> menuItems = parseMenuFile(filename);
         // send menuItems to server using socket programming
     }
@@ -17,16 +21,19 @@ public class MenuParser {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
             String line = reader.readLine();
             while (line != null) {
-                String[] element = line.split("|");
+                String[] element = line.split("\\|");
                 String food = element[0].trim();
-                String restaurantName = element[1].trim();
+                String description = element[1].trim();
                 double price = Double.parseDouble(element[2].trim()); //parse a string to double
 
                 String picture = element[3].trim();//?????????????????????????????????????????
 
                 // Decode the base64-encoded picture data
                 byte[] imageData = Base64.getDecoder().decode(picture);
-                MenuItem item = new MenuItem(food, restaurantName, price, picture);
+
+                // Image image = Toolkit.getDefaultToolkit().createImage(imageData);
+
+                MenuItem item = new MenuItem(food, description, price, imageData);
                 menuItems.add(item);
                 line = reader.readLine();
                 // Create an ImageIcon from the decoded byte array
@@ -42,32 +49,33 @@ public class MenuParser {
         return menuItems;
     }
 
-    public static void sendMenuToServer(ArrayList<MenuItem> menuItems) {
-        try {
-            Socket socket = new Socket(address, port);
-            ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-            outputStream.writeObject(menuItems);
-            outputStream.flush();
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // public static void sendMenuToServer(ArrayList<MenuItem> menuItems) {
+    //     try {
+    //         Socket socket = new Socket(address, port);
+    //         ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+    //         outputStream.writeObject(menuItems);
+    //         outputStream.flush();
+    //         socket.close();
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
     
     public static class MenuItem {
-        String itemName;
+        String food;
         String description;
         double price;
         byte[] imageData;
         
         public MenuItem(String itemName, String description, double price, byte[] imageData) {
-            this.itemName = itemName;
+            this.food = itemName;
             this.description = description;
             this.price = price;
             this.imageData = imageData;
+        } ;
         }
     }
-}
+
 
 
 
