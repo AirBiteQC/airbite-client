@@ -118,6 +118,7 @@ public class SignupForm
                 entries += tname.getText();
                 entries += "|"+(String)temail.getText();
                 String p = new String(tpass.getPassword());
+                p = encryptStringWithPublicKey("Publickey", p);
                 entries += "|"+p;
                
             System.out.println("SingupForm: Sending to Server : "+ entries);
@@ -158,7 +159,27 @@ public class SignupForm
             term.setSelected(false);
         }
     }
-
+    public static String encryptStringWithPublicKey(String publicKeyString, String str) throws Exception {
+        // Remove the PEM header and footer, and any newline characters
+        String base64PublicKey = publicKeyString
+                .replace("-----BEGIN PUBLIC KEY-----", "")
+                .replace("-----END PUBLIC KEY-----", "")
+                .replaceAll("\\s", "");
+  
+        // Convert the public key string to a PublicKey object
+        byte[] publicKeyBytes = Base64.getDecoder().decode(base64PublicKey);
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicKeyBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        PublicKey publicKey = keyFactory.generatePublic(keySpec);
+  
+        // Initialize the cipher with the public key
+        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+  
+        // Encrypt the string and encode it to Base64
+        byte[] encryptedBytes = cipher.doFinal(str.getBytes(StandardCharsets.UTF_8));
+        return Base64.getEncoder().encodeToString(encryptedBytes);
+    }
     public static void main(String[] args){
        // new SignupForm();
     }
