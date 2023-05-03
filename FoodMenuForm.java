@@ -4,12 +4,19 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.util.Base64;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import java.io.IOException;
 
 public class FoodMenuForm extends JFrame {
     private JList<String> foodList;
     private DefaultListModel<String> listModel;
 
     private JLabel descriptionLabel;
+    private JLabel imageLabel;
     private JLabel priceLabel;
     private JButton addToCartButton;
     private JTextArea cartTextArea;
@@ -19,25 +26,30 @@ public class FoodMenuForm extends JFrame {
     private String[] foodNames ;
     private String[] descriptions ;
     private double[] prices ;
+    private String[] image ;
+
 
     public FoodMenuForm(String menu) {
 
         // replace input string with menu  ie inputstring = menu
-        String inputString = "name1|discription1|10\nname1|discription|40\nname5|discription5|20\n";
+        String inputString = "name1|discription1|10|sdjbvcjsdhbv\nname1|discription|40|sdhjbvcjhdsdbvc\nname5|discription5|20|sdhvbjshbd\n";
 
         String[] lines = inputString.split("\\n"); // Split input into lines
 
         String[] array1 = new String[lines.length];
         String[] array2 = new String[lines.length];
         String[] array3 = new String[lines.length];
+        String[] array4 = new String[lines.length];
 
         for (int i = 0; i < lines.length; i++) {
             String[] parts = lines[i].split("\\|"); // Split each line into parts using the pipe delimiter
             array1[i] = parts[0];
             array2[i] = parts[1];
             array3[i] = parts[2];
+            array4[i] = parts[3];
         }
         double[] doublearray3 = new double[array3.length];
+
 
         for (int i = 0; i < array3.length; i++) {
             doublearray3[i] = Double.parseDouble(array3[i]);
@@ -46,6 +58,7 @@ public class FoodMenuForm extends JFrame {
         foodNames = array1;
         descriptions = array2;
         prices = doublearray3;
+        image = array4;
         setTitle("Food Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(2, 2));
@@ -69,6 +82,9 @@ public class FoodMenuForm extends JFrame {
         descriptionLabel = new JLabel("");
         infoPanel.add(descriptionLabel);
 
+        imageLabel = new JLabel();
+        infoPanel.add(imageLabel);
+
         priceLabel = new JLabel("");
         infoPanel.add(priceLabel);
 
@@ -87,7 +103,6 @@ public class FoodMenuForm extends JFrame {
         pack();
         setVisible(true);
     }
-
     private class FoodListListener implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent event) {
             if (!event.getValueIsAdjusting()) {
@@ -96,12 +111,30 @@ public class FoodMenuForm extends JFrame {
                     String selectedFood = foodNames[selectedIndex];
                     String selectedDescription = descriptions[selectedIndex];
                     double selectedPrice = prices[selectedIndex];
+
+                    // Decode the Base64 image string
+                    byte[] decodedBytes = Base64.getDecoder().decode(image[selectedIndex]);
+
+                    // Convert the byte array to a BufferedImage
+                    BufferedImage img = null;
+                    try {
+                        img = ImageIO.read(new ByteArrayInputStream(decodedBytes));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    // Update the ImageIcon of the imageLabel
+                    //ImageIcon icon = new ImageIcon(img);
+                    //imageLabel.setIcon(icon);
+                    
+                    //System.out.println("=======================");
                     descriptionLabel.setText(selectedDescription);
                     priceLabel.setText("Price: $" + selectedPrice);
                 }
             }
         }
     }
+
 
     private class AddToCartButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
