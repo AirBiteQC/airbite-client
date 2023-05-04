@@ -32,17 +32,17 @@ public class SignupForm
         this.setModal(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Sign up Form");
-        setBounds(300, 90, 600, 400);
+        setBounds(250, 200, 600, 400);
        // this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setResizable(false);
  
         c = getContentPane();
         c.setLayout(null);
  
-        title = new JLabel("Sign Up Form");
+        title = new JLabel("AirBite Sign Up");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
         title.setSize(300, 30);
-        title.setLocation(100, 30);
+        title.setLocation(100, 40);
         c.add(title);
  
         name = new JLabel("Name");
@@ -81,12 +81,11 @@ public class SignupForm
         temail.setLocation(200, 155);
         c.add(temail);
  
-
-
         term = new JCheckBox("Accept Terms And Conditions.");
         term.setFont(new Font("Arial", Font.PLAIN, 15));
         term.setSize(250, 20);
         term.setLocation(150, 200);
+        term.addActionListener(this);
         c.add(term);
  
         sub = new JButton("Submit");
@@ -94,6 +93,7 @@ public class SignupForm
         sub.setSize(100, 20);
         sub.setLocation(150, 250);
         sub.addActionListener(this);
+        sub.setEnabled(false);
         c.add(sub);
  
         reset = new JButton("Reset");
@@ -112,40 +112,53 @@ public class SignupForm
     // by the user and act accordingly
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getSource() == sub) {
+        if (e.getSource() == term) {
+            if (term.isSelected())
+                sub.setEnabled(true);
+            else
+                sub.setEnabled(false);
+        }
+        else if (e.getSource() == sub) {
             if (term.isSelected()) {
                 entries = "register|";
                 entries += tname.getText();
-                entries += "|"+(String)temail.getText();
+                entries += "|" + temail.getText();
+                String encryptedEntries = new String(entries);
                 String p = new String(tpass.getPassword());
-                p = encryptStringWithPublicKey("Publickey", p);
-                entries += "|"+p;
+                try {
+                    encryptedEntries += "|" + Client.encryptStringWithPublicKey(p);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+
+                entries += "|" + p;
                
-            System.out.println("SingupForm: Sending to Server : "+ entries);
-            try{
-                Client.os.write(entries.getBytes());
-                // get server response
-                byte[] response = new byte[1024];
-                Client.is.read(response);
-                String res = new String(response);
-                System.out.println("LoginForm: server response " + new String(res));
-                // display a dialog box if the response is "Login failed"
-                if(res.contains("failed")) {
-                    System.out.println("signupForm: Registeration Failed");
-                    this.setModal(false);
-                    this.dispose();
-                    JOptionPane.showMessageDialog(this, "Email already Exist", "Sign-up failed", JOptionPane.ERROR_MESSAGE, new ImageIcon("./img/AirBite-64px-round.png"));
+                System.out.println("SingupForm: Sending to Server : "+ encryptedEntries);
+
+                try {
+                    Client.os.write(entries.getBytes());
+                    // get server response
+                    byte[] response = new byte[1024];
+                    Client.is.read(response);
+                    String res = new String(response);
+                    System.out.println("LoginForm: server response " + new String(res));
+                    // display a dialog box if the response is "Login failed"
+                    if(res.contains("failed")) {
+                        System.out.println("signupForm: Registeration Failed");
+                        this.setModal(false);
+                        this.dispose();
+                        JOptionPane.showMessageDialog(this, "Email already Exist", "Sign-up failed", JOptionPane.ERROR_MESSAGE, new ImageIcon("./img/AirBite-64px-round.png"));
+                    }
+                    else{
+                        System.out.println("Signup Form: Signup successful");
+                        this.setModal(false);
+                        this.dispose();
+                        JOptionPane.showMessageDialog(this, "Signup Successful! Welcome "+ tname.getText() );
+                    }
                 }
-                else{
-                    System.out.println("Signup Form: Signup successful");
-                    this.setModal(false);
-                    this.dispose();
-                    JOptionPane.showMessageDialog(this, "Login Successful Welcome "+ tname.getText() );
+                catch(Exception ioe){
+                    ioe.printStackTrace();
                 }
-            }
-            catch(Exception ioe){
-                ioe.printStackTrace();
-            }
                 
             }
         }
@@ -159,27 +172,7 @@ public class SignupForm
             term.setSelected(false);
         }
     }
-    public static String encryptStringWithPublicKey(String publicKeyString, String str) throws Exception {
-        // Remove the PEM header and footer, and any newline characters
-        String base64PublicKey = publicKeyString
-                .replace("-----BEGIN PUBLIC KEY-----", "")
-                .replace("-----END PUBLIC KEY-----", "")
-                .replaceAll("\\s", "");
-  
-        // Convert the public key string to a PublicKey object
-        byte[] publicKeyBytes = Base64.getDecoder().decode(base64PublicKey);
-        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicKeyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        PublicKey publicKey = keyFactory.generatePublic(keySpec);
-  
-        // Initialize the cipher with the public key
-        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-        cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-  
-        // Encrypt the string and encode it to Base64
-        byte[] encryptedBytes = cipher.doFinal(str.getBytes(StandardCharsets.UTF_8));
-        return Base64.getEncoder().encodeToString(encryptedBytes);
-    }
+
     public static void main(String[] args){
        // new SignupForm();
     }

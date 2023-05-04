@@ -19,7 +19,8 @@ public class BillingForm extends JFrame implements ActionListener {
       setTitle("Billing Address Form");
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setLayout(new GridLayout(6, 2));
-
+      // display the form in the center of the screen
+      setLocationRelativeTo(null);
       countryLabel = new JLabel("Country:");
       countryField = new JTextField(16);
       stateLabel = new JLabel("State:");
@@ -57,6 +58,10 @@ public class BillingForm extends JFrame implements ActionListener {
                                         +" Address:"+addressField.getText() + " State:"+stateField.getText()
                                         +" Zip:"+zipField.getText();
         System.out.print(billinginformation);
+        // Display a confirmation message
+        JOptionPane.showMessageDialog(null,
+              "Your order has been submitted. Thank you " + Client.name + "!");
+
         this.dispose();
     }
    }

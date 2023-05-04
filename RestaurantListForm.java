@@ -77,6 +77,14 @@ public class RestaurantListForm extends JFrame implements ActionListener {
             try {
                 String str = "select|" + list.getSelectedValue();
                 Client.os.write(str.getBytes());
+                // get server response
+                // wait until all bytes are received
+                byte[] response = new byte[104800000];
+                Client.is.read(response);
+                String res = new String(response).replace("\r", "").replace("\"", "").replace("\0",
+                        "");
+                System.out.println("RestaurantListForm: Server response: " + res);
+                Client.foodMenuForm = new FoodMenuForm(list.getSelectedValue(), res);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
