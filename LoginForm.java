@@ -2,10 +2,16 @@
 // a Simple Registration Form
 // using Java Swing
  
+import javax.crypto.Cipher;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.KeyFactory;
+import java.security.PublicKey;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
  
 public class LoginForm
     extends JDialog
@@ -93,7 +99,12 @@ public class LoginForm
             entries = "login|";
             entries += temail.getText(); 
             String p = new String(tpass.getPassword());
-            p = encryptStringWithPublicKey("Publickey", p);
+            try {
+                p = encryptStringWithPublicKey("Publickey", p);
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
             entries += "|"+p; 
             System.out.println("LoginForm: send to server " + entries);
             // send to server
