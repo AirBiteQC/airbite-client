@@ -126,10 +126,10 @@ public class LoginForm
                     JOptionPane.showMessageDialog(this, "Welcome back, " + Client.role + " " + Client.name + "!", "Login successful", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("./img/AirBite-64px-round.png"));
                     // close the landing form
                     Client.landingForm.dispose();
-                    System.out.println(Client.role.strip());
-                    System.out.println("passenger");
-                    System.out.println("passenger".compareTo(Client.role.strip()));
-                    if ("restaurant".equals(Client.role.strip())) {
+                    // System.out.println(Client.role.strip());
+                    // System.out.println("passenger");
+                    // System.out.println("passenger".compareTo(Client.role.strip()));
+                    if ("restaurant".equals(Client.role)) {
                         // open the restaurant form
                         Client.restaurantForm = new Restaurant();
                         Client.restaurantForm.setVisible(true);
